@@ -10,8 +10,8 @@
 
 .top-section {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   border: solid;
   border-color: blue;
@@ -22,7 +22,8 @@
 
 .bottom-section {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   border: solid;
   border-color: blue;
