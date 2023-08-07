@@ -1,4 +1,4 @@
-export const response = {
+export const hardcodedResponse = {
   tokens: [
     "We",
     " had",

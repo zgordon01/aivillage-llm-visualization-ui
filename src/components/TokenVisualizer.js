@@ -4,6 +4,7 @@ const TokenVisualizer = ({ data }) => {
   const [highlightedNodes, setHighlightedNodes] = useState([]);
 
   useEffect(() => {
+    if (!data) return;
     const colors = ["#53f5ba", "#6ed3f1", "#fa69c1", "#ac7ffd", "#f3b681"];
     let nextColorIndex = 0;
     const coloredTokens = data.map((token) => {

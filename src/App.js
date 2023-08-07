@@ -1,7 +1,7 @@
 import "./App.css";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-import { response } from "./heatmapData";
+import { hardcodedResponse } from "./heatmapData";
 import { useDebounce } from "@uidotdev/usehooks";
 import Heatmap from "./components/Heatmap";
 import TokenVisualizer from "./components/TokenVisualizer";
@@ -11,14 +11,42 @@ import LoadingOverlay from "./LoadingOverlay";
 function App() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState();
 
   const debouncedText = useDebounce(text, 500);
 
   useEffect(() => {
     if (!debouncedText) return;
-    // TODO make request and add set state here?
-    setLoading(true);
+    const asyncEffect = async () => {
+      setLoading(true);
+      setResponse(await fetchData());
+      setLoading(false);
+    };
+    asyncEffect();
   }, [debouncedText]);
+
+  const fetchData = async () => {
+    if (!process.env.REACT_APP_POST_ENDPOINT) return hardcodedResponse;
+    try {
+      const apiResponse = await fetch(process.env.REACT_APP_POST_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        cache: "no-cache",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "text/plain",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: debouncedText, // body data type must match "Content-Type" header
+      });
+      console.log(apiResponse);
+      return await apiResponse?.json();
+    } catch (e) {
+      console.log(e);
+      return hardcodedResponse;
+    }
+  };
 
   return (
     <div className="app-container">
@@ -36,8 +64,8 @@ function App() {
           />
         </div>
         <div class="top-right-section">
-          <TokenVisualizer data={response.tokens} />
-          <NextWordTable data={response.logits} />
+          <TokenVisualizer data={response?.tokens} />
+          <NextWordTable data={response?.logits} />
         </div>
       </div>
       <div className="bottom-section">

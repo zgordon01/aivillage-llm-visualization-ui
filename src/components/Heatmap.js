@@ -3,6 +3,7 @@ import * as d3 from "d3";
 
 const Heatmap = ({ domId, data, toColor = "#033eff" }) => {
   useEffect(() => {
+    if (!data) return;
     d3.select(`#${domId}`).select("svg").remove();
 
     constructHeatmap();
