@@ -1,5 +1,6 @@
 # Getting Started
 `npm install`
+
 Create / Update your `.env` file in the root of your directory (at the same level as package.json)
 Start by adding these values to your local `.env` file.
 
