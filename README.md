@@ -6,7 +6,7 @@ This project works in tandem with the [llm_visualization repo](https://github.co
 2. Create `.env` in the root of the project (same level as package.json) and add values to it.<br />
 `REACT_APP_POST_ENDPOINT` is the POST endpoint from the llm_visualization api
 ```
-REACT_APP_POST_ENDPOINT=localhost:8000/
+REACT_APP_POST_ENDPOINT=http://localhost:8000/
 ```
 
 3. `npm run start`

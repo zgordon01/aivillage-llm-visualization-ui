@@ -61,13 +61,13 @@ function App() {
       <div className="top-section">
         <div>
           <TextField
-            id="text-field-contents"
             label="Input"
             autoFocus
             placeholder="Type here"
             variant="outlined"
             multiline
             minRows={10}
+            inputProps={{ maxLength: 2500 }}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

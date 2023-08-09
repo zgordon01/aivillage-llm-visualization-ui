@@ -45,6 +45,10 @@
     text-transform: none !important;
 }
 
+textarea {
+    max-height: 300px;
+}
+
 #aivillagelogo {
     position: absolute;
     top: 0;
