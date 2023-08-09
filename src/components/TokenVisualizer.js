@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { FormLabel } from "@mui/material";
 
 const TokenVisualizer = ({ data }) => {
   const [highlightedNodes, setHighlightedNodes] = useState([]);
 
   useEffect(() => {
-    if (!data) return;
+    if (!data) {
+      setHighlightedNodes([]);
+      return;
+    }
     const colors = ["#53f5ba", "#6ed3f1", "#fa69c1", "#ac7ffd", "#f3b681"];
     let nextColorIndex = 0;
     const coloredTokens = data.map((token) => {
@@ -19,8 +23,11 @@ const TokenVisualizer = ({ data }) => {
   }, [data]);
 
   return (
-    <div id="tokenize-visualize" style={{ height: 100, width: 200 }}>
-      {highlightedNodes}
+    <div>
+      {!!highlightedNodes.length && <FormLabel>Token Visualizer</FormLabel>}
+      <div id="tokenize-visualize" style={{ height: 100, width: 200 }}>
+        {highlightedNodes}
+      </div>
     </div>
   );
 };

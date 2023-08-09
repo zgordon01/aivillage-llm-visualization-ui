@@ -13,6 +13,12 @@
   height: 50vh;
 }
 
+.top-right-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .bottom-section {
   display: flex;
   flex-direction: row;
@@ -33,4 +39,14 @@
     position: absolute;
     left: 48vw;
     top: 48vh;
+}
+
+.MuiButton-contained {
+    text-transform: none !important;
+}
+
+#aivillagelogo {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

@@ -16,10 +16,13 @@ function App() {
   const debouncedText = useDebounce(text, 500);
 
   useEffect(() => {
-    if (!debouncedText) return;
+    if (!debouncedText) {
+      setResponse({});
+      return;
+    }
     const asyncEffect = async () => {
       setLoading(true);
-      setResponse(await fetchData());
+      await fetchData();
       setLoading(false);
     };
     asyncEffect();
@@ -30,22 +33,27 @@ function App() {
     try {
       const apiResponse = await fetch(process.env.REACT_APP_POST_ENDPOINT, {
         method: "POST",
-        mode: "no-cors",
+        mode: "cors",
         cache: "no-cache",
         headers: {
           Accept: "application/json",
-          "Content-Type": "text/plain",
+          "Content-Type": "application/json",
         },
         redirect: "follow",
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: debouncedText, // body data type must match "Content-Type" header
+        body: JSON.stringify({ userInput: debouncedText }), // body data type must match "Content-Type" header
       });
-      console.log(apiResponse);
-      return await apiResponse?.json();
+      const r = JSON.parse(await apiResponse?.json());
+      console.log(r);
+      setResponse(r);
     } catch (e) {
       console.log(e);
       return hardcodedResponse;
     }
+  };
+
+  const onTokenPress = (e) => {
+    setText(`${text}${e}`);
   };
 
   return (
@@ -60,12 +68,13 @@ function App() {
             variant="outlined"
             multiline
             minRows={10}
+            value={text}
             onChange={(e) => setText(e.target.value)}
           />
         </div>
         <div class="top-right-section">
           <TokenVisualizer data={response?.tokens} />
-          <NextWordTable data={response?.logits} />
+          <NextWordTable data={response?.logits} onTokenPress={onTokenPress} />
         </div>
       </div>
       <div className="bottom-section">
@@ -73,8 +82,13 @@ function App() {
           domId="embedding"
           data={response?.embedding}
           toColor="#38C415"
+          displayName="Embedding"
         />
-        <Heatmap domId="context" data={response?.context} />
+        <Heatmap
+          domId="context"
+          data={response?.context}
+          displayName="Context"
+        />
       </div>
       {loading && <LoadingOverlay />}
     </div>

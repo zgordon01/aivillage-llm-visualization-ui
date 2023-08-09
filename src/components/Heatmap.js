@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
+import { FormLabel } from "@mui/material";
 
-const Heatmap = ({ domId, data, toColor = "#033eff" }) => {
+const Heatmap = ({ domId, data, toColor = "#033eff", displayName }) => {
   useEffect(() => {
-    if (!data) return;
+    if (!data) {
+      d3.select(`#${domId}`).select("svg").remove();
+      return;
+    }
     d3.select(`#${domId}`).select("svg").remove();
 
     constructHeatmap();
@@ -97,7 +101,12 @@ const Heatmap = ({ domId, data, toColor = "#033eff" }) => {
     return [lowerBound, upperBound];
   };
 
-  return <div id={domId} />;
+  return (
+    <div>
+      {!!data && <FormLabel>{displayName}</FormLabel>}
+      <div id={domId} />
+    </div>
+  );
 };
 
 export default Heatmap;
