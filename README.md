@@ -1,14 +1,14 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-Create / Update your `.env` file in the root of your directory (at the same level as package.json)
+# Getting Started
+1. Run `npm install`
+<br /><br />
+2. Create / Update your `.env` file in the root of your directory (at the same level as package.json)
 Start by adding these values to your local `.env` file.
 
 ```
 REACT_APP_POST_ENDPOINT=localhost:3002/path/to/api
 ```
 
+3. `npm run start`
 ## Available Scripts
 
 In the project directory, you can run:
