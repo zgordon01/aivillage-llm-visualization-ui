@@ -1,22 +1,12 @@
 # Getting Started
+This project works in tandem with the [llm_visualization repo](https://github.com/zgordon01/llm_visualization). First get that running, then proceed!
+
 1. Run `npm install`
 <br /><br />
-2. Create / Update your `.env` file in the root of your directory (at the same level as package.json)
-Start by adding these values to your local `.env` file.
-
+2. Create `.env` in the root of the project (same level as package.json) and add values to it.<br />
+`REACT_APP_POST_ENDPOINT` is the POST endpoint from the llm_visualization api
 ```
 REACT_APP_POST_ENDPOINT=localhost:8000/
 ```
 
 3. `npm run start`
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
