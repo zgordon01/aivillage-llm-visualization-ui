@@ -5,7 +5,7 @@
 Start by adding these values to your local `.env` file.
 
 ```
-REACT_APP_POST_ENDPOINT=localhost:3002/path/to/api
+REACT_APP_POST_ENDPOINT=localhost:8000/
 ```
 
 3. `npm run start`
